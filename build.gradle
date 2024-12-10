@@ -10,7 +10,7 @@ ext {
 }
 
 group = 'com.promptoven'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 java {
     toolchain {
@@ -57,7 +57,9 @@ dependencies {
 
     implementation 'ognl:ognl:3.4.3'
 
-    implementation 'io.lettuce:lettuce-core:6.5.0.RELEASE'
+    implementation 'io.lettuce:lettuce-core:6.5.1.RELEASE'
+
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 }
 
 dependencyManagement {

@@ -2,6 +2,7 @@ package com.promptoven.authservice.application.service;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,7 @@ public class VerificationService implements VerificationUseCase {
 	public void requestEmail(EmailRequestRequestDTO emailRequestRequestDTO) {
 		String email = emailRequestRequestDTO.getEmail();
 		String code = makeRandomCode();
-		mailSending.sendMail(email, "Email Verification Code", "Your verification code is " + code);
+		CompletableFuture.runAsync(() -> mailSending.sendMail(email, "Email Verification Code", "Your verification code is " + code));
 		authTaskMemory.recordAuthChallenge(AuthChallengeDTO.builder()
 			.media(email)
 			.code(code)

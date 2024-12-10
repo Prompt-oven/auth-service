@@ -62,9 +62,9 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/auth-service
             sudo docker stop auth-service || true
             sudo docker rm -f auth-service || true
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/auth-service
             cd /home/ubuntu/auth-service
             echo "SPRING_PROFILES_ACTIVE=prod" > .env
             sudo docker-compose up -d
